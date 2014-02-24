@@ -1,0 +1,213 @@
+
+R version 2.15.3 (2013-03-01) -- "Security Blanket"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> require(graph)
+Loading required package: graph
+> require(eulerian)
+Loading required package: eulerian
+> 
+> g <- new("graphNEL", nodes=as.character(1:10), edgemode="directed")
+> g <- addEdge(graph=g, from="1", to="10")
+> g <- addEdge(graph=g, from="2", to="1")
+> g <- addEdge(graph=g, from="2", to="6")
+> g <- addEdge(graph=g, from="3", to="2")
+> g <- addEdge(graph=g, from="4", to="2")
+> g <- addEdge(graph=g, from="5", to="4")
+> g <- addEdge(graph=g, from="6", to="5")
+> g <- addEdge(graph=g, from="6", to="8")
+> g <- addEdge(graph=g, from="7", to="9")
+> g <- addEdge(graph=g, from="8", to="7")
+> g <- addEdge(graph=g, from="9", to="6")
+> g <- addEdge(graph=g, from="10", to="3")
+> 
+> 
+> testNum <- 1
+> cat("Test-", testNum, ": ", sep="")
+Test-1: > has <- hasEulerianPath(g)
+> msg <- ifelse(has==TRUE, "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-2: > has <- hasEulerianCycle(g)
+> msg <- ifelse(has==TRUE, "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-3: > epath <- eulerian(g)
+> msg <- ifelse(length(epath)==numEdges(g)+1, "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> cat("##############\n")
+##############
+> 
+> ###########################################
+> g <- addEdge(graph=g, from="5", to="6")
+> ##########################################
+> 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-4: > has <- hasEulerianPath(g)
+> msg <- ifelse(has==TRUE, "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-5: > has <- hasEulerianPath(g, "5")
+> msg <- ifelse(has==TRUE, "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-6: > has <- hasEulerianPath(g, "6")
+> msg <- ifelse(has==FALSE, "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-7: > has <- hasEulerianCycle(g)
+> msg <- ifelse(has==FALSE, "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-8: > epath <- eulerian(g, "5")
+> msg <- ifelse(length(epath)==numEdges(g)+1, "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-9: > epath <- tryCatch(eulerian(g, "7"), error = function(e) NA);
+> msg <- ifelse(is.na(epath), "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> cat("##############\n")
+##############
+> 
+> ########################################
+> g <- new("graphNEL", nodes=LETTERS[6:1], edgemode="undirected")
+> g <- addEdge(graph=g, from=c("A","B","B","C","D"), to=c("B","C","D","E","E"))
+> ########################################
+> 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-10: > has <- hasEulerianPath(g)
+> msg <- ifelse(has==TRUE, "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-11: > has <- hasEulerianPath(g, "A")
+> msg <- ifelse(has==TRUE, "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-12: > has <- hasEulerianPath(g, "B")
+> msg <- ifelse(has==TRUE, "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-13: > has <- hasEulerianPath(g, "C")
+> msg <- ifelse(has==FALSE, "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-14: > has <- hasEulerianPath(g, "F")
+> msg <- ifelse(has==FALSE, "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-15: > has <- hasEulerianCycle(g)
+> msg <- ifelse(has==FALSE, "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-16: > epath <- eulerian(g, "B")
+> msg <- ifelse(length(epath)==numEdges(g)+1 && epath[1]=="B", "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-17: > epath <- tryCatch(eulerian(g, "C"), error = function(e) NA);
+> msg <- ifelse(is.na(epath), "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> cat("###############\n")
+###############
+> ########################################
+> g <- new("graphNEL", nodes=LETTERS[1:4], edgemode="undirected")
+> g <- addEdge(graph=g, from=c("A","B","C","D"), to=c("B","A","D","C"))
+> ########################################
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-18: > has <- hasEulerianPath(g)
+> msg <- ifelse(has==FALSE, "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-19: > has <- hasEulerianCycle(g)
+> msg <- ifelse(has==FALSE, "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-20: > epath <- tryCatch(eulerian(g, "C"), error = function(e) NA);
+> msg <- ifelse(is.na(epath), "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> 
+> cat("###############\n")
+###############
+> ########################################
+> g <- new("graphNEL", nodes=LETTERS[1:5], edgemode="undirected")
+> g <- addEdge(graph=g, from=c("A","B","B","C", "C", "D", "C","C"), to=c("B","C","D","E", "C", "E","C","C"))
+> ########################################
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-21: > has <- hasEulerianPath(g)
+> msg <- ifelse(has==TRUE, "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-22: > has <- hasEulerianCycle(g)
+> msg <- ifelse(has==FALSE, "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> cat("Test-", testNum <- testNum + 1, ": ", sep="")
+Test-23: > epath <- tryCatch(eulerian(g, "B"), error = function(e) NA);
+> msg <- ifelse(length(epath)==numEdges(g)+1 && epath[1]=="B", "passed", "failed!!!")
+> cat(msg, "\n")
+passed 
+> 
+> proc.time()
+   user  system elapsed 
+   0.65    0.00    0.63 

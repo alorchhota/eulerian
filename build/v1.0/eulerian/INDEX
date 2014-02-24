@@ -1,0 +1,7 @@
+eulerian                Method for finding an eulerian path or cycle.
+eulerian-package        eulerian: A package to handle eulerian paths
+                        from graphs
+hasEulerianCycle        Method for checking whether an eulerian cycle
+                        exists.
+hasEulerianPath         Method for checking whether an eulerian path
+                        exists.

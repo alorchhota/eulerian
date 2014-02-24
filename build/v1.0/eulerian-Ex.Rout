@@ -1,0 +1,150 @@
+
+R version 2.15.3 (2013-03-01) -- "Security Blanket"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "eulerian"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> options(pager = "console")
+> library('eulerian')
+> 
+> assign(".oldSearch", search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("eulerian-package")
+> ### * eulerian-package
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: eulerian-package
+> ### Title: eulerian: A package to handle eulerian paths from graphs
+> ### Aliases: eulerian-package
+> ### Keywords: package graph euler eulerian
+> 
+> ### ** Examples
+> 
+> 	require(graph)
+Loading required package: graph
+> 	require(eulerian)
+> 	g <- new("graphNEL", nodes=LETTERS[1:4], edgemode="directed")
+> 	g <- addEdge(graph=g, from=LETTERS[1:4], to=LETTERS[c(2:4,1)])
+> 	if(hasEulerianCycle(g)){
++ 		ecycle <- eulerian(g)
++ 		writeLines(paste(ecycle, collapse=" -> "))
++ 	}
+A -> B -> C -> D -> A
+> 
+> 
+> 
+> cleanEx()
+
+detaching 'package:graph'
+
+> nameEx("eulerian")
+> ### * eulerian
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: eulerian
+> ### Title: Method for finding an eulerian path or cycle.
+> ### Aliases: eulerian
+> ### Keywords: ~kwd1 ~kwd2
+> 
+> ### ** Examples
+> 
+> 	require(graph)
+Loading required package: graph
+> 	require(eulerian)
+> 	g <- new("graphNEL", nodes=LETTERS[1:4], edgemode="uirected")
+> 	g <- addEdge(graph=g, from=LETTERS[1:3], to=LETTERS[2:4])
+> 	ep <- eulerian(g)
+> 	
+> 	g <- new("graphNEL", nodes=as.character(1:10), edgemode="directed")
+> 	g <- addEdge(graph=g, from=c("1","2","2","3","4","5","6","6","7","8","9","10"), 
++ 			to=c("10","1","6","2","2","4","5","8","9","7","6","3"))
+> 	ep <- eulerian(g, "6")
+> 
+> 
+> 
+> cleanEx()
+
+detaching 'package:graph'
+
+> nameEx("hasEulerianCycle")
+> ### * hasEulerianCycle
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: hasEulerianCycle
+> ### Title: Method for checking whether an eulerian cycle exists.
+> ### Aliases: hasEulerianCycle
+> ### Keywords: ~kwd1 ~kwd2
+> 
+> ### ** Examples
+> 
+> 	require(graph)
+Loading required package: graph
+> 	require(eulerian)
+> 	g <- new("graphNEL", nodes=LETTERS[1:4], edgemode="directed")
+> 	g <- addEdge(graph=g, from=LETTERS[1:4], to=LETTERS[c(2:4,1)])
+> 	hasEulerianCycle(g)
+[1] TRUE
+> 
+> 
+> 
+> cleanEx()
+
+detaching 'package:graph'
+
+> nameEx("hasEulerianPath")
+> ### * hasEulerianPath
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: hasEulerianPath
+> ### Title: Method for checking whether an eulerian path exists.
+> ### Aliases: hasEulerianPath
+> ### Keywords: ~kwd1 ~kwd2
+> 
+> ### ** Examples
+> 
+> 	require(graph)
+Loading required package: graph
+> 	require(eulerian)
+> 	g <- new("graphNEL", nodes=LETTERS[1:4], edgemode="undirected")
+> 	g <- addEdge(graph=g, from=LETTERS[c(1:4)], to=LETTERS[c(2:4,4)])
+> 	hasEulerianPath(g)	#TRUE
+[1] TRUE
+> 	hasEulerianPath(g, "B")	#FALSE
+[1] FALSE
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cat("Time elapsed: ", proc.time() - get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.5 0 0.52 NA NA 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
